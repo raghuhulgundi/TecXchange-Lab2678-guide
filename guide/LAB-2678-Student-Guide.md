@@ -144,9 +144,13 @@ Your instructor gives you a sign-in slip with your **student ID** (sNN), your **
 
 > **Note:** This copy of the guide does not include the lab environment's addresses. Your instructor provides the **Concert Operate URL**, the **bastion host name and port**, and your **user name and password**. In the commands below, replace **\<bastion-host\>** and **\<port\>** with the values you are given.
 
-1.  **Log in to Concert Operate:** open the browser on the student desktop, go to the Concert Operate URL and on the login page choose **Enterprise LDAP** as the login method (not the default IBM provided credentials), then sign in as studentNN with the password on your sign-in slip. You land on the Concert Operate home page.
+1.  **Log in to Concert Operate:** open the browser on the student desktop, go to the Concert Operate URL and on the login page: (1) under **Log in with** choose **Enterprise LDAP** (not the default IBM provided credentials), (2) enter your user name studentNN, (3) the password on your sign-in slip, and click (4) **Log in**.
 
-![screenshot](images/011-027.jpg)
+![screenshot](images/login-page-ann.png)
+
+You land on the Concert Operate home page. The **Navigation menu** icon (boxed, top-left) is how you reach every page in this lab.
+
+![screenshot](images/home-page-ann.png)
 
 2.  **Log in to the bastion:** on the student desktop, open **PowerShell** (Start menu, type powershell) and run the following, using the same password (answer **yes** if asked to trust the host). Keep this window open: it is your **bastion window** for sending events.
 
@@ -206,17 +210,17 @@ For example, student s01 sees this. Each event must end in HTTP 200 or 202. Anyt
 
 ![screenshot](images/pending-2.3-refresh-ann.png)
 
-5.  Let's add some color to this page: click the gear icon on the right, select **User preferences**, turn the **Row coloring** slider On (green) and click **Save**.
+5.  Let's add some color to this page: click the (1) gear icon on the right, select (2) **User preferences**, turn the **Row coloring** slider On (green) and click **Save**.
 
-![screenshot](images/pending-2.3-step3-prefs.jpg)
+![screenshot](images/pending-2.3-step3-prefs-ann.png)
 
 6.  Click the (1) **View correlation** icon in the top-right. The (2) Correlation column is empty for all 3 alerts (example for s01).
 
 ![screenshot](images/pending-warmup-alerts-ann.png)
 
-7.  With the search still set to sNN, click the **checkbox at the top-left** of the list to select all your alerts, right-click and select **Clear**. They change state from Open to Clear and then to Closed, and disappear after 2 to 3 minutes. Move on without waiting. **Never use the select-all checkbox with an empty search box: it would clear every student's alerts.**
+7.  With the (1) search still set to sNN, click the (2) **checkbox at the top-left** of the list to select all your alerts, right-click and select (3) **Clear**. They change state from Open to Clear and then to Closed, and disappear after 2 to 3 minutes. Move on without waiting. **Never use the select-all checkbox with an empty search box: it would clear every student's alerts.**
 
-![screenshot](images/pending-2.3-step5-clear.jpg)
+![screenshot](images/pending-2.3-step5-clear-ann.png)
 
 ## 3 Event and Alert Terminology
 
@@ -263,7 +267,7 @@ At 23:26 UTC a developer commits a change to the database configuration file my.
 
 Without help, an operator sees 17 alerts from 11 tools. Which one do you work on first?
 
-1.  Open the **Navigation menu** and navigate to (1) **Operate → Incidents**. ((2) **AI model management** is described at the end of this section.)
+1.  In the Concert Operate console (log in with **Enterprise LDAP** as studentNN if your session timed out), open the **Navigation menu** and navigate to (1) **Operate → Incidents**. ((2) **AI model management** is described at the end of this section.)
 
 ![screenshot](images/30-ai-nav.png)
 
@@ -420,12 +424,12 @@ Different observers can record the same resource as two (or more) resources. A *
 ![screenshot](images/044-135-ann.png)
 
 6.  Expand the **Conditions** drop-down:
-    - **Observers:** select **File** and click **Add**.
-    - **Providers (required on a shared cluster):** type **sNN-infrastructure.txt**, choose (1) **FILE.OBSERVER:sNN-infrastructure.txt** from the list and click (2) **Add**. Repeat for **sNN-application.txt**. Pick only your own two files (the list shows every student's files). This keeps your rule from running on everyone's data.
-    - **Resource types:** add **computer**.
+    - \(1\) **Observers:** select **File** and click **Add**.
+    - \(2\) **Providers (required on a shared cluster):** type **sNN-infrastructure.txt**, choose (1) **FILE.OBSERVER:sNN-infrastructure.txt** from the list and click (2) **Add**. Repeat for **sNN-application.txt**. Pick only your own two files (the list shows every student's files). This keeps your rule from running on everyone's data.
+    - \(3\) **Resource types:** add **computer**.
     - Leave the Token filter mode and Token filters sections blank.
 
-![screenshot](images/045-138.jpg)
+![screenshot](images/045-138-ann.png)
 
 ![screenshot](images/01-4.2-step6-providers-ann.png)
 
@@ -514,9 +518,9 @@ An **Application** is a collection of topology resource groups that represent a 
 > **Why this matters:** Operators think in services, not in routers and computers. An application wraps your resource groups into one business service, and its business criticality (Platinum is the highest) tells operations which incidents to work on first.
 
 1.  From **Operate → Resource management**, click the **Define application** button in the top-right.
-2.  Search for your ID and select your 3 groups: **ROUTER-sNN-router1**, **APPSERVER-sNN-computer1000** and **APPSERVER-sNN-computer1001**.
+2.  \(1\) Search for your ID and (2) select your 3 groups: **ROUTER-sNN-router1**, **APPSERVER-sNN-computer1000** and **APPSERVER-sNN-computer1001**.
 
-![screenshot](images/069-216.jpg)
+![screenshot](images/069-216-ann.png)
 
 3.  Click **Next** to preview the application: (1) 8 resources and 6 relationships. Click (2) **Next** again to add details.
 
