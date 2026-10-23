@@ -193,24 +193,26 @@ For example, student s01 sees this. Each event must end in HTTP 200 or 202. Anyt
 
 > **Tip:** the cluster is shared by the whole class, so new alerts can take a minute or two to appear. Wait, then click **Refresh alerts** before deciding something is wrong. This applies every time you send events in this lab.
 
-![screenshot](images/pending-2.3-step1-output.jpg)
+![screenshot](images/pending-2.3-step1-output-ann.png)
 
 2.  Switch back to the browser with the Concert Operate console. If your session timed out, log in again as studentNN with **Enterprise LDAP**.
-3.  From the burger menu in the top-left navigate to: **Operate → Alerts**.
+3.  Click the (1) **Navigation menu** icon in the top-left and navigate to: **Operate → (2) Alerts**.
 
-![screenshot](images/pending-2.3-step2-menu.jpg)
+![screenshot](images/nav-menu-icon-ann.png)
 
-4.  Type your ID, **sNN**, in the search box and click the **Refresh alerts** icon next to it. You should see 3 alerts on sNN-computer1000, sNN-router1 and sNN-greatFireWallOfSecurity.
+![screenshot](images/pending-2.3-step2-menu-ann.png)
 
-![screenshot](images/pending-2.3-refresh.jpg)
+4.  Type your ID, **sNN**, in the (1) search box and click the (2) **Refresh alerts** icon next to it. You should see 3 alerts on sNN-computer1000, sNN-router1 and sNN-greatFireWallOfSecurity.
+
+![screenshot](images/pending-2.3-refresh-ann.png)
 
 5.  Let's add some color to this page: click the gear icon on the right, select **User preferences**, turn the **Row coloring** slider On (green) and click **Save**.
 
 ![screenshot](images/pending-2.3-step3-prefs.jpg)
 
-6.  Click the **View correlation** icon in the top-right. The Correlation column is empty for all 3 alerts (example for s01).
+6.  Click the (1) **View correlation** icon in the top-right. The (2) Correlation column is empty for all 3 alerts (example for s01).
 
-![screenshot](images/pending-warmup-alerts.png)
+![screenshot](images/pending-warmup-alerts-ann.png)
 
 7.  With the search still set to sNN, click the **checkbox at the top-left** of the list to select all your alerts, right-click and select **Clear**. They change state from Open to Clear and then to Closed, and disappear after 2 to 3 minutes. Move on without waiting. **Never use the select-all checkbox with an empty search box: it would clear every student's alerts.**
 
@@ -261,7 +263,7 @@ At 23:26 UTC a developer commits a change to the database configuration file my.
 
 Without help, an operator sees 17 alerts from 11 tools. Which one do you work on first?
 
-1.  Open the menu and navigate to (1) **Operate → Incidents**. ((2) **AI model management** is described at the end of this section.)
+1.  Open the **Navigation menu** and navigate to (1) **Operate → Incidents**. ((2) **AI model management** is described at the end of this section.)
 
 ![screenshot](images/30-ai-nav.png)
 
@@ -368,30 +370,30 @@ Each line of a file is one vertex. The "uniqueId" field must be unique within th
 
 > **Why this matters:** This lab uses the File observer. It loads topology from a plain text file, so you can bring in resources from any source, even one that has no out-of-the-box observer or integration: a homegrown CMDB, a spreadsheet export or a script's output. It shows how flexible the product is: if you can write the data to a file, Concert Operate can model it.
 
-1.  From the burger menu in the top-left navigate to: **Define → Integrations**.
+1.  From the **Navigation menu** in the top-left navigate to: **Define → Integrations**.
 2.  From the Integrations page, click on **Add integration**. Under **Category** click on **Topology**, search for **File**, click on the **File** tile and click **Get started**.
 
 ![screenshot](images/084-263.jpg)
 
-3.  In the **New Observer Job: File** form, open **Choose your job type** and select **load** (not multi_file). Then fill in:
-    - **Unique ID:** sNN-infrastructure
+3.  In the **New Observer Job: File** form, open (1) **Choose your job type** and select **load** (not multi_file). Then fill in:
+    - \(2\) **Unique ID:** sNN-infrastructure
     - **File mode:** keep **Upload local file**
-    - **Local file name:** drag **sNN-infrastructure.txt** from the lab-sNN folder in your user folder (copied in Section 2.1 (Accessing your Lab Environment)) onto **Drag and drop file here or click to upload**, or click it and browse to the file
-    - **Provider:** leave it empty. Concert Operate then uses FILE.OBSERVER:sNN-infrastructure.txt, which your merge rule needs in Section 5.2 (Merge Rules in Action).
+    - \(3\) **Local file name:** drag **sNN-infrastructure.txt** from the lab-sNN folder in your user folder (copied in Section 2.1 (Accessing your Lab Environment)) onto **Drag and drop file here or click to upload**, or click it and browse to the file
+    - \(4\) **Provider:** leave it empty. Concert Operate then uses FILE.OBSERVER:sNN-infrastructure.txt, which your merge rule needs in Section 5.2 (Merge Rules in Action).
 
     Click **Save**. The job runs the moment it is saved.
 
-![screenshot](images/pending-file-observer-load-form.png)
+![screenshot](images/pending-file-observer-load-form-ann.png)
 
-4.  Click on the **Add a new job** button, choose the **File** observer, select job type **load** again and repeat the process with the Unique ID **sNN-application** and the file **sNN-application.txt**.
+4.  Click on the (1) **Add a new job** button, choose the **File** observer, select job type **load** again and repeat the process with the Unique ID **sNN-application** and the file **sNN-application.txt**.
 5.  Repeat once more (job type **load**) with the Unique ID **sNN-application2** and the file **sNN-application2.txt**.
-6.  Verify that your three jobs show the **Ready** status. Filter the list by your ID, because you will see everyone's jobs.
+6.  Verify that your three jobs show the (2) **Ready** status. Filter the list by your ID, because you will see everyone's jobs.
 
-![screenshot](images/086-269.jpg)
+![screenshot](images/086-269-ann.png)
 
-7.  From the burger menu navigate to: **Operate → Resource management**. Click on the **Resources** tab and search for **sNN-**. You should see 12 resources, including **two** called sNN-computer1000: one from each file. We will merge them in the next step.
+7.  From the **Navigation menu** navigate to: **Operate → Resource management**. Click on the (1) **Resources** tab and (2) search for **sNN-**. You should see 12 resources, including (3) **two** called sNN-computer1000: one from each file. We will merge them in the next step.
 
-![screenshot](images/025-070.jpg)
+![screenshot](images/025-070-ann.png)
 
 8.  Click on **sNN-router1**, increase the number of hops to **2** and click **Render** to see the infrastructure.
 
@@ -415,20 +417,20 @@ Different observers can record the same resource as two (or more) resources. A *
 4.  **Rule name:** sNN-InfraApps. Set **Status** to **Enabled**.
 5.  **Tokens:** type **\${name}** and click on **Add**.
 
-![screenshot](images/044-135.jpg)
+![screenshot](images/044-135-ann.png)
 
 6.  Expand the **Conditions** drop-down:
     - **Observers:** select **File** and click **Add**.
-    - **Providers (required on a shared cluster):** type **sNN-infrastructure.txt**, choose **FILE.OBSERVER:sNN-infrastructure.txt** from the list and click **Add**. Repeat for **sNN-application.txt**. Pick only your own two files (the list shows every student's files). This keeps your rule from running on everyone's data.
+    - **Providers (required on a shared cluster):** type **sNN-infrastructure.txt**, choose (1) **FILE.OBSERVER:sNN-infrastructure.txt** from the list and click (2) **Add**. Repeat for **sNN-application.txt**. Pick only your own two files (the list shows every student's files). This keeps your rule from running on everyone's data.
     - **Resource types:** add **computer**.
     - Leave the Token filter mode and Token filters sections blank.
 
 ![screenshot](images/045-138.jpg)
 
-![screenshot](images/01-4.2-step6-providers.png)
+![screenshot](images/01-4.2-step6-providers-ann.png)
 
 7.  Click **Save**.
-8.  From the burger menu navigate to: **Define → Integrations**. Click on the **Manage observer jobs** tab and click on **Configure, schedule, and manage observer jobs**.
+8.  From the **Navigation menu** navigate to: **Define → Integrations**. Click on the **Manage observer jobs** tab and click on **Configure, schedule, and manage observer jobs**.
 
 ![screenshot](images/046-141.jpg)
 
@@ -436,9 +438,9 @@ Different observers can record the same resource as two (or more) resources. A *
 
 ![screenshot](images/046-142.jpg)
 
-10. Navigate to **Operate → Resource management** and search for **sNN-computer1000**. Now there is just one instance. Click on it, change the hop view to **2** and click **Render**: the router, CPUs, steve, billing and webserver all connect to it.
+10. Navigate to **Operate → Resource management** and search for **sNN-computer1000**. Now there is just one instance. Click on it, change the (1) hop view to **2** and click (2) **Render**: the router, CPUs, steve, billing and webserver all connect to it.
 
-![screenshot](images/02-4.2-step10-merged-computer.png)
+![screenshot](images/02-4.2-step10-merged-computer-ann.png)
 
 ### 5.3 Exact Group Template
 
@@ -455,17 +457,17 @@ Topology group templates create groups of resources. Resource groups make it eas
 ![screenshot](images/049-151.jpg)
 
 3.  Configure the template:
-    - **Template name:** sNN-router1
+    - \(1\) **Template name:** sNN-router1
     - **Resource group type:** network
-    - **Resource group naming pattern:** type **ROUTER-** in **Name prefix** (leave Name suffix empty). Your group will be called ROUTER-sNN-router1.
-    - **Alert correlation:** turn on **Correlate alert groups on topologies from this template** (it is off by default). Keep **Time window length** at **900** seconds and **Time window type** at **Rolling**. This is what makes alerts on these resources correlate in Section 8 (Topological Correlation).
+    - \(2\) **Resource group naming pattern:** type **ROUTER-** in **Name prefix** (leave Name suffix empty). Your group will be called ROUTER-sNN-router1.
+    - \(3\) **Alert correlation:** turn on **Correlate alert groups on topologies from this template** (it is off by default). Keep **Time window length** at **900** seconds and **Time window type** at **Rolling**. This is what makes alerts on these resources correlate in Section 8 (Topological Correlation).
     - Leave every other field as it is: Description, Icon, tag, default filter and the two **Disabled** switches. (Copying tags would label your group with LAB-sNN, which later templates use to pick resources.)
-    - In **Search for a resource to get started**, type **sNN-router1**, hit Enter and choose it.
-    - Change the view to **1 hop** and click **Render**: router, firewall and computer.
+    - \(4\) In **Search for a resource to get started**, type **sNN-router1**, hit Enter and choose it.
+    - \(5\) Change the view to **1 hop** and click **Render**: router, firewall and computer.
 
-![screenshot](images/pending-exact-template-filled.png)
+![screenshot](images/pending-exact-template-filled-ann.png)
 
-4.  Click **Save template & generate resource group**.
+4.  Click (6) **Save template & generate resource group**.
 5.  Click on **Resource management**, select the **Resource groups** tab and search for your ID. Click on **ROUTER-sNN-router1**: the group has router, firewall and computer. If a size of 4 is shown, that is correct: sNN-computer1000 is counted twice because it is one resource merged from two files.
 
 ![screenshot](images/052-162.jpg)
@@ -483,27 +485,27 @@ A **dynamic** template records a recipe from one example and builds a group for 
 ![screenshot](images/058-181.jpg)
 
 2.  Configure the template:
-    - **Template name:** sNN-AppServers
-    - **Resource group type:** compute
-    - **Maximum number of groups to create:** 20 (required: Save stays grey without it)
-    - **Name prefix:** APPSERVER-
-    - **Icon:** compute
-    - **Alert correlation:** turn on **Correlate alert groups on topologies from this template** (off by default). Keep **900** seconds and **Rolling**.
+    - \(1\) **Template name:** sNN-AppServers
+    - \(2\) **Resource group type:** compute
+    - \(3\) **Maximum number of groups to create:** 20 (required: Save stays grey without it)
+    - \(4\) **Name prefix:** APPSERVER-
+    - \(5\) **Icon:** compute
+    - \(6\) **Alert correlation:** turn on **Correlate alert groups on topologies from this template** (off by default). Keep **900** seconds and **Rolling**.
     - Leave the tag, default filter and **Copy all tags** as they are.
-    - Search for **sNN-computer1000** and choose it (not sNN-computer1001, which also appears). If you see **two** sNN-computer1000 rows, your merge rule from Section 5.2 (Merge Rules in Action) is not working: fix it first.
-    - Right-click on **sNN-computer1000** and select **Follow Relationship → runsOn**. Billing and webserver appear.
+    - \(7\) Search for **sNN-computer1000** and choose it (not sNN-computer1001, which also appears). If you see **two** sNN-computer1000 rows, your merge rule from Section 5.2 (Merge Rules in Action) is not working: fix it first.
+    - Right-click on **sNN-computer1000** and select **Follow Relationship → runsOn**. (8) Billing and webserver appear.
 
-![screenshot](images/pending-dynamic-template-filled.png)
+![screenshot](images/pending-dynamic-template-filled-ann.png)
 
-3.  Scroll down on the left side to **Template definition**. In the first block, **Seed: sNN-computer1000**, type **LAB-sNN** (upper case LAB) in **Filter tag (optional)** and click **Add tag**, so that LAB-sNN appears as a tag under the field. This is **required on a shared cluster**: without it, your template matches every student's computers. Leave the tag fields under **Follows relationship** empty.
-4.  Check the line at the top of Template definition: it must say **2 matching starting template seeds have been found**. A bigger number means the tag is missing; 0 means the tag text does not match.
+3.  Scroll down on the left side to **Template definition**. In the first block, **Seed: sNN-computer1000**, type **LAB-sNN** (upper case LAB) in (1) **Filter tag (optional)** and click **Add tag**, so that LAB-sNN appears as a tag under the field. This is **required on a shared cluster**: without it, your template matches every student's computers. Leave the tag fields under **Follows relationship** empty.
+4.  \(2\) Check the line at the top of Template definition: it must say **2 matching starting template seeds have been found**. A bigger number means the tag is missing; 0 means the tag text does not match.
 
-![screenshot](images/pending-dynamic-template-seed.png)
+![screenshot](images/pending-dynamic-template-seed-ann.png)
 
 5.  Click **Save template & generate resource groups**.
 6.  Under **Preview resource groups** check that exactly **2** groups appear: **APPSERVER-sNN-computer1000** and **APPSERVER-sNN-computer1001**. More than 2 means the LAB-sNN tag is missing: edit the template and add it.
 
-![screenshot](images/pending-dynamic-template-preview.png)
+![screenshot](images/pending-dynamic-template-preview-ann.png)
 
 ### 5.5 Applications and Business Criticality
 
@@ -516,9 +518,9 @@ An **Application** is a collection of topology resource groups that represent a 
 
 ![screenshot](images/069-216.jpg)
 
-3.  Click **Next** to preview the application: 8 resources and 6 relationships. Click **Next** again to add details.
+3.  Click **Next** to preview the application: (1) 8 resources and 6 relationships. Click (2) **Next** again to add details.
 
-![screenshot](images/pending-application-preview.png)
+![screenshot](images/pending-application-preview-ann.png)
 
 4.  Enter the details:
     - \(1\) **Name:** sNN-Order Capture Backend
@@ -557,41 +559,41 @@ Your instructor disabled the product's preset scope-based policies before class,
 
     ./send-events.sh sNN-scope-events.json
 
-2.  Navigate to **Operate → Alerts**, click **Refresh alerts** and type your ID, **sNN**, in the search bar of the alerts so it only shows your alerts. All 8 alerts are shown, but there is no grouping.
+2.  Navigate to **Operate → Alerts**, click **Refresh alerts** and type your ID, **sNN**, in the (1) search bar of the alerts so it only shows your alerts. All 8 alerts are shown, but there is no grouping: the (2) Correlation column is empty.
 
-![screenshot](images/04-5.1-step2-alerts-ungrouped.png)
+![screenshot](images/04-5.1-step2-alerts-ungrouped-ann.png)
 
 3.  With the search still set to sNN, click the **checkbox at the top-left** to select your 8 alerts, right-click and select **Clear**. Creating the policy in the next step takes long enough for them to close.
 
 ### 6.2 Create a Scope-based Event Grouping Policy
 
-1.  Navigate to **Operate → Automations**. On the **Policies** tab click the **Filter** icon, check **Scope-based** and click **Apply**.
+1.  Navigate to **Operate → Automations**. On the **Policies** tab click the **Filter** icon (circled), check (1) **Scope-based** and click (2) **Apply**.
 
-![screenshot](images/037-110.jpg)
+![screenshot](images/037-110-ann.png)
 
 2.  Read only, no need to open it: the list includes **v2 Default scope policy - Correlation on alert resource name...**, which your instructor disabled. As its name says, it groups alerts on the **same resource**. Your alerts are on different servers, so you create your own policy that groups by **location and application**. **Do not open, enable or change the preset scope policies.**
 
 <!-- -->
 
 3.  Click **Create policy** and select the **Group alerts based on scope** tile.
-4.  Under **Policy details**: make sure the policy is **Enabled**, set the **Policy name** to **sNN - Group by Location-Application** and change the **Execution order** to **40**.
-5.  Under **Policy triggers**, check **Before an alert is created**.
+4.  Under **Policy details**: make sure the policy is **Enabled**, set the (1) **Policy name** to **sNN - Group by Location-Application** and change the (2) **Execution order** to **40**. (The screenshot shows an older policy name.)
+5.  Under **Policy triggers**, check (3) **Before an alert is created**.
 
-![screenshot](images/040-121.jpg)
+![screenshot](images/040-121-ann.png)
 
-6.  Under **Condition sets**, click **Add condition** and select **Alert property**:
-    - **Condition 1:** leave **AND** selected. Property **alert.resource.location**, Operator **contains**, Matches **any of**, Values **US-SOUTH** and **US-EAST** (type each in uppercase and select String).
-    - **Condition 2 (required on a shared cluster):** click **Add alert property condition** and keep **AND**. Property **alert.resource.application**, Operator **equal to**, Matches **only**, Value **sNN-NetCash**. This keeps your policy from grouping other students' alerts, including their baselines.
+6.  Under **Condition sets**, click (1) **Add condition** and select **Alert property**:
+    - \(2\) **Condition 1:** leave **AND** selected. Property **alert.resource.location**, Operator **contains**, Matches **any of**, Values **US-SOUTH** and **US-EAST** (type each in uppercase and select String).
+    - \(4\) **Condition 2 (required on a shared cluster):** click (3) **Add alert property condition** and keep **AND**. Property **alert.resource.application**, Operator **equal to**, Matches **only**, Value **sNN-NetCash**. This keeps your policy from grouping other students' alerts, including their baselines.
 
-![screenshot](images/06-5.2-step6-conditions.png)
+![screenshot](images/06-5.2-step6-conditions-ann.png)
 
 7.  Under **Create a scope-based grouping**, select **resource.location**, type the colon character **:** and select **String: :**, then select **resource.application**. Your ScopeID should read:
 
-![screenshot](images/039-118.jpg)
+![screenshot](images/039-118-ann.png)
 
-8.  Under **Time window**: type **900** (15 minutes) and select **Rolling**. Alerts are grouped as long as they are not separated by more than 15 minutes.
+8.  Under **Time window**: type (1) **900** (15 minutes) and select (2) **Rolling**. Alerts are grouped as long as they are not separated by more than 15 minutes.
 
-![screenshot](images/041-125.jpg)
+![screenshot](images/041-125-ann.png)
 
 9.  Click **Create policy** on the top-right.
 
@@ -632,17 +634,17 @@ Training takes longer than a lab slot and the model is shared by the whole clust
 
 ### 7.1 Review your Temporal Policies
 
-1.  Navigate to **Operate → AI model management** and click the **Temporal grouping** tile. The **Summary** page shows the algorithm and how it is trained (training data: past 90 days, manual schedule). On this shared cluster the model was trained for the class before you started, and the **Latest model version**, **Date trained** and **Activity** fields can show a dash: that is expected. The proof that the model is trained is the set of policies it created, which you review next. **Do not click Train model and create policies, and never use Delete in the Danger zone.**
+1.  Navigate to **Operate → AI model management** and click the **Temporal grouping** tile. The **Summary** page shows the algorithm and how it is trained (training data: (1) past 90 days, (2) manual schedule). On this shared cluster the model was trained for the class before you started, and the (3) **Latest model version**, **Date trained** and **Activity** fields can show a dash: that is expected. The proof that the model is trained is the set of policies it created, which you review next. **Do not click (4) Train model and create policies, and never use Delete in the (5) Danger zone.**
 
-![screenshot](images/14-6.1-step1-temporal-summary.png)
+![screenshot](images/14-6.1-step1-temporal-summary-ann.png)
 
 2.  Navigate to **Operate → Automations** and select the **Policies** tab. (1) Click the **Filter** icon, (2) check **Temporal**, (3) click **Apply**. (4) Type your ID, **sNN**, in the search box. (5) Exactly two policies remain, both yours: **\[sNN\] Newsletter service error rate high** and **\[sNN\] Synthetic test failed for \>1min on https://sNN-myapp.example.com**. The other temporal policies belong to other students and to the cluster's demo applications. **Do not edit, disable or delete any temporal policy.**
 
 ![screenshot](images/15-6.1-step2-temporal-filter.png)
 
-3.  Click your **\[sNN\] Synthetic test failed...** policy. The slider shows its **Condition set**: **If any condition is met**, with two values of **alert.signature**: your front-end-svc high error rate alert and your synthetic test alert. Both contain sNN, so the policy matches only your alerts. These values were learned from your history, where the two alerts co-occurred. **Then take the following actions**: **Key by policy.id** and **groupV2** put matching alerts that first occur within 60 seconds of each other into one group (the group stays open for up to an hour). **Do not use the Delete or Archive icons at the top of the slider.**
+3.  Click your **\[sNN\] Synthetic test failed...** policy. The slider shows its **Condition set**: (1) **If any condition is met**, with two values of **alert.signature**: your front-end-svc high error rate alert and your synthetic test alert. Both contain sNN, so the policy matches only your alerts. These values were learned from your history, where the two alerts co-occurred. **Then take the following actions**: (2) **Key by policy.id** and (3) **groupV2** put matching alerts that first occur within 60 seconds of each other into one group (the group stays open for up to an hour). **Do not use the (4) Delete or Archive icons at the top of the slider.**
 
-![screenshot](images/16-6.1-step3-policy-detail.png)
+![screenshot](images/16-6.1-step3-policy-detail-ann.png)
 
 4.  Click **Justification** at the top-right of the slider.
 
@@ -686,9 +688,9 @@ Topological alert grouping groups alerts based on the topology resource groups i
 
     ./send-events.sh sNN-topology-events-network.json
 
-2.  Navigate to **Operate → Resource management**, click on the **Resource groups** tab and search for your ID. **ROUTER-sNN-router1** now shows 3 alerts in the **Resource alerts** column.
+2.  Navigate to **Operate → Resource management**, click on the (1) **Resource groups** tab and search for your ID. **ROUTER-sNN-router1** now shows 3 alerts in the (2) **Resource alerts** column.
 
-![screenshot](images/092-291.jpg)
+![screenshot](images/092-291-ann.png)
 
 > **Why this matters:** An operator who sees three alerts first wants to know whether they are one problem, and whether something changed. The topology view answers the first: the alerts sit on resources that are linked, inside the group you built in Section 5.3. The Topology activity panel answers the second: it puts alert severity and topology changes on the same timeline, so you can see whether a new link or a configuration change happened just before the alerts started. Here the topology was stable, which points to a failure on the devices rather than a change.
 
@@ -738,11 +740,11 @@ If you finish early, try the two remaining template types.
 A tag-based template builds a single, dynamic resource group containing all resources that have the specified tags. Resources don't have to be connected; they only need the common tag.
 
 1.  In **Resource group templates**, click **Create a new template**, select **Tag based template** and click **Start**.
-2.  **Template name:** sNN-tag-template. **Resource group type:** compute. **Resource group name:** sNN-tag-group.
+2.  \(1\) **Template name:** sNN-tag-template. (2) **Resource group type:** compute. (3) **Resource group name:** sNN-tag-group.
 3.  Leave **Correlate event groups** **off**, so the group does not absorb your router and app server groups.
-4.  Type **LAB-sNN** in **Search for a tag to get started**, hit Enter, check it and click the **Resources** tab: all 11 of your resources.
+4.  Type **LAB-sNN** in (4) **Search for a tag to get started**, hit Enter, check it and click the (5) **Resources** tab: all 11 of your resources. (The screenshot shows the original lab tag.)
 
-![screenshot](images/054-168.jpg)
+![screenshot](images/054-168-ann.png)
 
 5.  Click **Save template & generate resource group**. The group sNN-tag-group appears under **Resource groups**.
 
