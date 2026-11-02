@@ -2,8 +2,8 @@
 
 **IBM TechXchange 2026, Shared Cluster Edition.** Author: Raghu Hulgundi (raghu.hulgundi@ibm.com)
 
-> **Note:** This copy of the guide does not include the lab environment's addresses or credentials. Your instructor
-> provides the Concert Operate URL, the bastion host name and port, and your user name and password.
+> **Note:** This copy of the guide does not include the lab environment's addresses or logins. Your instructor
+> provides the Concert Operate URL, your user name and password, and the webhook settings for your student kit.
 > A PDF version is in the repository: [LAB-2678-Student-Guide.pdf](../LAB-2678-Student-Guide.pdf).
 
 ## Table of Contents
@@ -128,23 +128,23 @@ In this edition of the lab, all students work on **one shared Concert Operate cl
 
 ## 2 Lab Environment
 
-In this Lab, you will use three systems:
+In this Lab, you will use two systems:
 
-**Student Desktop:** a standard Windows desktop. You use its browser to log in to the Concert Operate console, and its PowerShell to connect to the bastion host and to copy your topology files.
-
-**Bastion Host:** a shared Red Hat Enterprise Linux (RHEL) server. You log in with your own student account. Your student kit is already in your home folder, and you use it to send events to Concert Operate.
+**Your laptop:** Windows 10 or 11, or macOS. You use its browser to log in to the Concert Operate console and to upload your topology files, and a terminal (PowerShell on Windows, Terminal on Mac) to send events to Concert Operate from your student kit.
 
 **OpenShift Cluster:** one Red Hat OpenShift cluster running IBM Concert Operate 5.2, shared by the whole class.
 
-![screenshot](images/008-015.jpg)
+![screenshot](images/lab-environment-laptop.png)
 
 ### 2.1 Accessing your Lab Environment
 
-Your instructor gives you a sign-in slip with your **student ID** (sNN), your **user name** (studentNN) and **password**, the **Concert Operate URL**, and the **bastion host name and SSH port**.
+Your instructor gives you a sign-in slip with your **student ID** (sNN), your **user name** (studentNN) and **password**, the **Concert Operate URL**, and the **webhook settings** (webhook URL, webhook user name and webhook password) that your kit uses to send events.
 
-> **Note:** This copy of the guide does not include the lab environment's addresses. Your instructor provides the **Concert Operate URL**, the **bastion host name and port**, and your **user name and password**. In the commands below, replace **\<bastion-host\>** and **\<port\>** with the values you are given.
+> **Note:** This copy of the guide does not include the lab environment's addresses or logins. Your instructor provides the **Concert Operate URL**, your **user name and password**, and the **webhook settings**.
 
-1.  **Log in to Concert Operate:** open the browser on the student desktop, go to the Concert Operate URL and on the login page: (1) under **Log in with** choose **Enterprise LDAP** (not the default IBM provided credentials), (2) enter your user name studentNN, (3) the password on your sign-in slip, and click (4) **Log in**.
+- **Student kits:** **https://github.com/raghuhulgundi/TecXchange-Lab2678-guide/tree/main/kits**
+
+1.  **Log in to Concert Operate:** open the browser on your laptop, go to the Concert Operate URL and on the login page: (1) under **Log in with** choose **Enterprise LDAP** (not the default IBM provided credentials), (2) enter your user name studentNN, (3) the password on your sign-in slip, and click (4) **Log in**.
 
 ![screenshot](images/login-page-ann.png)
 
@@ -152,52 +152,57 @@ You land on the Concert Operate home page. The **Navigation menu** icon (boxed, 
 
 ![screenshot](images/home-page-ann.png)
 
-2.  **Log in to the bastion:** on the student desktop, open **PowerShell** (Start menu, type powershell) and run the following, using the same password (answer **yes** if asked to trust the host). Keep this window open: it is your **bastion window** for sending events.
+2.  **Download your student kit:** in a new browser tab, open **https://github.com/raghuhulgundi/TecXchange-Lab2678-guide/tree/main/kits**, click **lab-sNN.zip** (your own ID) and click the **Download raw file** icon on the right. Or open the file directly: **https://github.com/raghuhulgundi/TecXchange-Lab2678-guide/raw/main/kits/lab-sNN.zip**
+3.  **Unzip it in your Downloads folder:**
+    - **Windows:** in File Explorer, open **Downloads**, right-click **lab-sNN.zip**, choose **Extract All** and click **Extract**. This creates the folder **Downloads\lab-sNN**.
+    - **Mac:** in Finder, open **Downloads** and double-click **lab-sNN.zip**. This creates the folder **Downloads/lab-sNN**. Safari may already have done this for you.
+4.  **Open a terminal in your kit folder** and keep it open: it is your **terminal window** for sending events.
+    - **Windows:** open **PowerShell** (Start menu, type powershell) and run the first command below.
+    - **Mac:** open **Terminal** (Spotlight, type terminal) and run the second command below.
 
 <!-- -->
 
-    ssh -p <port> studentNN@<bastion-host>
-    cd ~/lab
+    cd $HOME\Downloads\lab-sNN
 
-3.  **Copy your topology files to the desktop:** in Section 5 (Topology) the browser uploads them from this desktop. Open a **second** PowerShell window and run these commands one at a time (**-P** must be upper case for scp):
+    cd ~/Downloads/lab-sNN
 
-<!-- -->
-
-    mkdir $HOME\lab-sNN
-    cd $HOME\lab-sNN
-    scp -P <port> studentNN@<bastion-host>:lab/*.txt .
-
-Your three topology files and README.txt are now in the **lab-sNN** folder in your user folder. A new folder keeps them separate from files left on this desktop by earlier sessions. You can close this second window now: from here on you need only the browser and your bastion window.
+> **Note:** the first time you send events, the sender asks for the **webhook URL**, **webhook user name** and **webhook password** from your sign-in slip (the password does not show while you type it). It saves them in **lab.env** in your kit folder, so later sends do not ask again.
 
 ### 2.2 Your Student Kit
 
-Open **README.txt** from the **lab-sNN** folder in Notepad and keep it open: it has every name you will type, with your ID filled in, ready to copy and paste. The table below lists your files; the .json files are sent for you by send-events.sh.
+Open **README.txt** from the **lab-sNN** folder in a text editor (Notepad or TextEdit) and keep it open: it has every name you will type, with your ID filled in, ready to copy and paste. The table below lists your files; the .json files are sent for you by the sender.
 
-| File                                                              | What it is                                           | Used in                                                       |
-|-------------------------------------------------------------------|------------------------------------------------------|---------------------------------------------------------------|
-| sNN-infrastructure.txt, sNN-application.txt, sNN-application2.txt | Topology data                                        | Section 5 (Topology), uploaded from the desktop               |
-| sNN-topology-events-network.json                                  | 3 events: computer, router, firewall                 | Section 2.3 (Warm-up) and Section 8 (Topological Correlation) |
-| sNN-scope-events.json                                             | 8 events: DB2, Liberty, API in 3 regions             | Section 6 (Scope-based Correlation)                           |
-| sNN-temporal-events.json                                          | 4 events on your sNN-myapp                           | Section 7 (Temporal Correlation)                              |
-| sNN-topology-events-app.json                                      | 3 events: computer, billing, webserver               | Section 8 (Topological Correlation)                           |
-| send-events.sh                                                    | Sends an event file to the lab webhook               | Run it in your bastion window                                 |
-| README.txt                                                        | Your ID, your event day and every name you will type | Keep it open in Notepad                                       |
+| File                                                              | What it is                                                 | Used in                                                       |
+|-------------------------------------------------------------------|------------------------------------------------------------|---------------------------------------------------------------|
+| sNN-infrastructure.txt, sNN-application.txt, sNN-application2.txt | Topology data                                              | Section 5 (Topology), uploaded from your laptop               |
+| sNN-topology-events-network.json                                  | 3 events: computer, router, firewall                       | Section 2.3 (Warm-up) and Section 8 (Topological Correlation) |
+| sNN-scope-events.json                                             | 8 events: DB2, Liberty, API in 3 regions                   | Section 6 (Scope-based Correlation)                           |
+| sNN-temporal-events.json                                          | 4 events on your sNN-myapp                                 | Section 7 (Temporal Correlation)                              |
+| sNN-topology-events-app.json                                      | 3 events: computer, billing, webserver                     | Section 8 (Topological Correlation)                           |
+| send-events.sh                                                    | Sends an event file to the lab webhook (Mac, Linux)        | Run it in your terminal window                                |
+| send-events.cmd, send-events.ps1                                  | Sends an event file to the lab webhook (Windows)           | Run send-events.cmd in your terminal window                   |
+| lab.env                                                           | Webhook settings, filled in the first time you send events | Saved for you by the sender                                   |
+| README.txt                                                        | Your ID, your event day and every name you will type       | Keep it open in a text editor                                 |
 
 ### 2.3 Warm-up: Send your First Events
 
 > **Why this matters:** You send 3 alerts on resources that Concert Operate does not know yet, so they arrive as 3 separate, ungrouped alerts. Keep this picture in mind: in Section 8 (Topological Correlation) you send the same alerts again after building the topology, and they arrive as one group. The difference is the topology you build in between.
 
-1.  In your bastion window, run:
+1.  In your terminal window, run the command for your laptop. This first time, enter the webhook settings from your sign-in slip when asked:
 
-<!-- -->
+**Mac or Linux:**
 
-    ./send-events.sh sNN-topology-events-network.json
+    bash send-events.sh sNN-topology-events-network.json
 
-For example, student s01 sees this. Each event must end in HTTP 200 or 202. Anything else: raise your hand.
+**Windows:**
+
+    .\send-events.cmd sNN-topology-events-network.json
+
+For example, student s01 on a Mac sees this. Each event must end in HTTP 200 or 202. Anything else: see Section 11 (Troubleshooting) or raise your hand.
 
 > **Tip:** the cluster is shared by the whole class, so new alerts can take a minute or two to appear. Wait, then click **Refresh alerts** before deciding something is wrong. This applies every time you send events in this lab.
 
-![screenshot](images/pending-2.3-step1-output-ann.png)
+![screenshot](images/laptop-send-output.png)
 
 2.  Switch back to the browser with the Concert Operate console. If your session timed out, log in again as studentNN with **Enterprise LDAP**.
 3.  Click the (1) **Navigation menu** icon in the top-left and navigate to: **Operate → (2) Alerts**.
@@ -382,7 +387,7 @@ Each line of a file is one vertex. The "uniqueId" field must be unique within th
 3.  In the **New Observer Job: File** form, open (1) **Choose your job type** and select **load** (not multi_file). Then fill in:
     - \(2\) **Unique ID:** sNN-infrastructure
     - **File mode:** keep **Upload local file**
-    - \(3\) **Local file name:** drag **sNN-infrastructure.txt** from the lab-sNN folder in your user folder (copied in Section 2.1 (Accessing your Lab Environment)) onto **Drag and drop file here or click to upload**, or click it and browse to the file
+    - \(3\) **Local file name:** drag **sNN-infrastructure.txt** from the lab-sNN folder in your Downloads folder (unzipped in Section 2.1 (Accessing your Lab Environment)) onto **Drag and drop file here or click to upload**, or click it and browse to the file
     - \(4\) **Provider:** leave it empty. Concert Operate then uses FILE.OBSERVER:sNN-infrastructure.txt, which your merge rule needs in Section 5.2 (Merge Rules in Action).
 
     Click **Save**. The job runs the moment it is saved.
@@ -557,11 +562,15 @@ Your instructor disabled the product's preset scope-based policies before class,
 
 > **Why this matters:** You first send the events with no policy in place, so you can see the noise an operator would face: 8 separate alerts for what is really two problems. In Section 6.3 you send the same events with your policy enabled and compare.
 
-1.  In your bastion window, run:
+1.  In your terminal window, run:
 
-<!-- -->
+**Mac or Linux:**
 
-    ./send-events.sh sNN-scope-events.json
+    bash send-events.sh sNN-scope-events.json
+
+**Windows:**
+
+    .\send-events.cmd sNN-scope-events.json
 
 2.  Navigate to **Operate → Alerts**, click **Refresh alerts** and type your ID, **sNN**, in the (1) search bar of the alerts so it only shows your alerts. All 8 alerts are shown, but there is no grouping: the (2) Correlation column is empty.
 
@@ -607,11 +616,15 @@ Your instructor disabled the product's preset scope-based policies before class,
 
 > **Important:** if you resend while your alerts are still in Clear state, the events reopen the old alerts instead of creating new ones, and your policy, which runs when an alert is **created**, never groups them. If that happens, clear them again, wait until none are shown, and resend.
 
-2.  In your bastion window, send the same events again:
+2.  In your terminal window, send the same events again:
 
-<!-- -->
+**Mac or Linux:**
 
-    ./send-events.sh sNN-scope-events.json
+    bash send-events.sh sNN-scope-events.json
+
+**Windows:**
+
+    .\send-events.cmd sNN-scope-events.json
 
 3.  Wait a minute, then click **Refresh alerts** with your ID in the search box. You should see 2 groups of 3 alerts (US-EAST and US-SOUTH) and the 2 EU-CENTRAL alerts on their own, because EU-CENTRAL is outside your policy.
 4.  \(1\) Click the **chevron** at the left of each **GROUP (3 alerts)** row to expand it. (2) Click the **View correlation** icon in the top-right toolbar. (3) The **Correlation** column now shows the scope-based icon on each grouped alert; the EU-CENTRAL alerts have none.
@@ -660,11 +673,15 @@ The **Temporal policy details** page shows the history that taught the model thi
 
 ### 7.2 Test your Temporal Policies
 
-1.  In your bastion window, send your 4 temporal events. Their timestamps are 15 seconds apart, newsletter pair first, so each pair falls inside the 60 second window:
+1.  In your terminal window, send your 4 temporal events. Their timestamps are 15 seconds apart, newsletter pair first, so each pair falls inside the 60 second window:
 
-<!-- -->
+**Mac or Linux:**
 
-    ./send-events.sh sNN-temporal-events.json
+    bash send-events.sh sNN-temporal-events.json
+
+**Windows:**
+
+    .\send-events.cmd sNN-temporal-events.json
 
 2.  Go to **Operate → Alerts**, click **Refresh alerts** and search for your **sNN**. Wait a minute or two if the alerts are not there yet; the cluster is shared with 30 other students. You see two groups, each with 2 alerts: **GROUP (2 alerts) \[sNN\] High error rate on sNN-front-end-svc...** and **GROUP (2 alerts) \[sNN\] Newsletter service error rate high**.
 3.  \(1\) Click the down arrow at the left of each group to expand it. (2) Click the **Correlation** icon at the top right of the alert list to show the Correlation column. (3) Every alert in both groups shows the **temporal** (clock) icon: they were grouped because the model learned from history that they happen together, not because they share a resource, location or topology link. The alerts in each group come from different senders and resources. **First occurrence** shows your own event day (YOUR EVENT DAY in your README), not today; each student has a different day so alerts never mix. **Do not clear or close other students' alerts.**
@@ -686,11 +703,15 @@ Topological alert grouping groups alerts based on the topology resource groups i
 
 ### 8.1 Validate Topological Correlation
 
-1.  In your bastion window, send the network events again:
+1.  In your terminal window, send the network events again:
 
-<!-- -->
+**Mac or Linux:**
 
-    ./send-events.sh sNN-topology-events-network.json
+    bash send-events.sh sNN-topology-events-network.json
+
+**Windows:**
+
+    .\send-events.cmd sNN-topology-events-network.json
 
 2.  Navigate to **Operate → Resource management**, click on the (1) **Resource groups** tab and search for your ID. **ROUTER-sNN-router1** now shows 3 alerts in the (2) **Resource alerts** column.
 
@@ -718,11 +739,15 @@ Topological alert grouping groups alerts based on the topology resource groups i
 
 The next 3 events hit sNN-computer1000, sNN-billing and sNN-webserver: all members of APPSERVER-sNN-computer1000, which belongs to your application.
 
-1.  In your bastion window, run:
+1.  In your terminal window, run:
 
-<!-- -->
+**Mac or Linux:**
 
-    ./send-events.sh sNN-topology-events-app.json
+    bash send-events.sh sNN-topology-events-app.json
+
+**Windows:**
+
+    .\send-events.cmd sNN-topology-events-app.json
 
 2.  Navigate to **Operate → Resource management** and click on the **Applications** tab. Your **sNN-Order Capture backend** card and row show (1) **Platinum** and (2)/(3) the **Resource alerts** by severity: 1 critical (web server returning HTTP 503), 1 major (billing batch job), 1 minor (memory at 95%). (4) The alerts roll up to the application and carry its Platinum criticality, which you set in Section 5.5. The list refreshes on its own; if the alerts are not there yet, wait a minute and click the refresh icon.
 
@@ -786,10 +811,12 @@ A **real-time, unified Topology View** lets you visualize topology changes over 
 
 | Symptom                                                                   | Fix                                                                                                                                                                                 |
 |---------------------------------------------------------------------------|-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| The sender prints FAILED or HTTP 401 or 403                               | Ask the instructor: the webhook settings in your kit need checking.                                                                                                                 |
-| "lab.env is not filled in yet"                                            | Your kit was not prepared. Ask the instructor.                                                                                                                                      |
+| The sender prints FAILED with HTTP 401 or 403                             | The webhook user name or password was mistyped. Delete **lab.env** from your kit folder and run the same command again: it asks for the webhook settings again.                     |
+| The sender prints FAILED with HTTP 000                                    | The webhook URL is wrong, or your network blocks it (try without VPN). Delete **lab.env** from your kit folder and run the same command again.                                      |
+| "File not found"                                                          | Your terminal is not in your kit folder. Run the cd command from Section 2.1 step 4 again.                                                                                          |
+| Windows: "curl.exe is not recognized"                                     | Your Windows is older than Windows 10 version 1803. Ask the instructor.                                                                                                             |
 | "This kit belongs to sNN"                                                 | You are sending a file from another student's kit. Use your own.                                                                                                                    |
-| ssh or scp rejects your password                                          | Use studentNN and the password on your sign-in slip. If it still fails, ask the instructor.                                                                                         |
+| Concert Operate rejects your password                                     | Choose **Enterprise LDAP**, then use studentNN and the password on your sign-in slip. If it still fails, ask the instructor.                                                        |
 | No alerts after sending                                                   | The cluster is shared, so alerts can take a minute or two to appear. Wait, click Refresh alerts, then check that the search box contains your ID.                                   |
 | Your resent scope events are not grouped                                  | The old alerts were still in Clear state and were reopened. Clear them, wait until searching your ID shows no alerts, then resend.                                                  |
 | Two sNN-computer1000 after the merge                                      | Check the merge rule's providers, then rerun both jobs.                                                                                                                             |
